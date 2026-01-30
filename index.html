@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Online Quiz Application</title>
+    <link rel="stylesheet" href="file.css" />
+  </head>
+  <body>
+    <div id="mainContainer">
+      <!-- Welcome Page -->
+      <div class="container" id="welcomePage">
+        <h1>Online Quiz Application</h1>
+        <p>Enter your details to begin</p>
+        <div id="inputContainer">
+          <input type="text" id="studentName" placeholder="Enter Name" />
+          <input type="text" id="rollNo" placeholder="Enter Roll Number" />
+        </div>
+
+        <button onclick="showSubjects()">Get Started</button>
+      </div>
+
+      <!-- Subject Page -->
+      <div class="container hidden" id="subjectPage">
+        <h2>Select Subject</h2>
+        <button class="subjectButton" onclick="fetchSubject('physics')">
+          Physics
+        </button>
+        <button class="subjectButton" onclick="fetchSubject('chemistry')">
+          Chemistry
+        </button>
+        <button class="subjectButton" onclick="fetchSubject('biology')">
+          Biology
+        </button>
+        <button class="subjectButton" onclick="fetchSubject('gk')">
+          General Knowledge
+        </button>
+      </div>
+
+      <!-- No of questions Page -->
+      <div class="container hidden" id="noOfQnsPage">
+        <h2>Select No of Questions</h2>
+        <div id="qnsNoButtons">
+          <button class="qnsNoButton" onclick="startQuiz(5)">5</button>
+          <button class="qnsNoButton" onclick="startQuiz(10)">10</button>
+          <button class="qnsNoButton" onclick="startQuiz(15)">15</button>
+        </div>
+        <div></div>
+      </div>
+      <!-- Quiz Page -->
+      <div class="container hidden" id="quizPage">
+        <p id="timer">Time Left: 10s</p>
+        <h3 id="question"></h3>
+        <div id="options">
+          <button class="optionsButton"></button>
+          <button class="optionsButton"></button>
+          <button class="optionsButton"></button>
+          <button class="optionsButton"></button>
+        </div>
+        <br />
+        <div id="operations">
+          <button id="prevButton">PREV</button>
+          <button id="submitButton">SUBMIT</button>
+          <button id="clearButton">CLEAR</button>
+          <button id="nextButton">NEXT</button>
+        </div>
+      </div>
+      <!-- Result Page -->
+      <div class="container hidden" id="resultPage">
+        <h2>Result</h2>
+        <p id="studentDetails"></p>
+        <p id="score"></p>
+        <p id="grade"></p>
+        <button onclick="location.reload()">Restart</button>
+      </div>
+      <!-- Progress Page -->
+    <div class="container hidden" id="ProgressPage"></div>
+    </div>
+
+    
+
+    <script src="script.js"></script>
+  </body>
+</html>
