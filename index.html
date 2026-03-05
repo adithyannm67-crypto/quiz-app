@@ -1,83 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Online Quiz Application</title>
-    <link rel="stylesheet" href="file.css" />
-  </head>
-  <body>
-    <div id="mainContainer">
-      <!-- Welcome Page -->
-      <div class="container" id="welcomePage">
-        <h1>Online Quiz Application</h1>
-        <p>Enter your details to begin</p>
-        <div id="inputContainer">
-          <input type="text" id="studentName" placeholder="Enter Name" />
-          <input type="text" id="rollNo" placeholder="Enter Roll Number" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster - Your Study Companion</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== MAIN PAGE ===================== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">QuizMaster</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#quizzes" class="nav-link">Quizzes</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+                <a href="#resources" class="nav-link">Resources</a>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+            </div>
+            <div class="datetime-display"><span id="currentDateTime"></span></div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Master Your Exams with QuizMaster</h1>
+            <p class="hero-subtitle">Practice quizzes for JEE, GATE, KEAM, and Classes 11-12</p>
+            <button class="cta-button" onclick="scrollToSection('quizzes')">Start Practicing</button>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <section id="quizzes" class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">Choose Your Quiz</h2>
+            <div class="quiz-grid">
+                <div class="quiz-card">
+                    <div class="quiz-icon">🎓</div><h3>JEE</h3><p>Joint Entrance Examination</p>
+                    <div class="subject-buttons">
+                        <button class="subject-btn" onclick="startQuiz('jee','physics')">Physics</button>
+                        <button class="subject-btn" onclick="startQuiz('jee','chemistry')">Chemistry</button>
+                        <button class="subject-btn" onclick="startQuiz('jee','mathematics')">Mathematics</button>
+                        <button class="subject-btn mixed" onclick="startQuiz('jee','mixed')">Mixed</button>
+                    </div>
+                </div>
+                <div class="quiz-card">
+                    <div class="quiz-icon">💻</div><h3>GATE</h3><p>Graduate Aptitude Test</p>
+                    <div class="subject-buttons">
+                        <button class="subject-btn" onclick="startQuiz('gate','aptitude')">Aptitude</button>
+                        <button class="subject-btn" onclick="startQuiz('gate','technical')">Technical</button>
+                        <button class="subject-btn mixed" onclick="startQuiz('gate','mixed')">Mixed</button>
+                    </div>
+                </div>
+                <div class="quiz-card">
+                    <div class="quiz-icon">📐</div><h3>KEAM</h3><p>Kerala Engineering Entrance</p>
+                    <div class="subject-buttons">
+                        <button class="subject-btn" onclick="startQuiz('keam','physics')">Physics</button>
+                        <button class="subject-btn" onclick="startQuiz('keam','chemistry')">Chemistry</button>
+                        <button class="subject-btn" onclick="startQuiz('keam','mathematics')">Mathematics</button>
+                        <button class="subject-btn mixed" onclick="startQuiz('keam','mixed')">Mixed</button>
+                    </div>
+                </div>
+                <div class="quiz-card">
+                    <div class="quiz-icon">📖</div><h3>Class 11</h3><p>CBSE/State Board</p>
+                    <div class="subject-buttons">
+                        <button class="subject-btn" onclick="startQuiz('class11','physics')">Physics</button>
+                        <button class="subject-btn" onclick="startQuiz('class11','chemistry')">Chemistry</button>
+                        <button class="subject-btn" onclick="startQuiz('class11','mathematics')">Mathematics</button>
+                        <button class="subject-btn" onclick="startQuiz('class11','biology')">Biology</button>
+                        <button class="subject-btn mixed" onclick="startQuiz('class11','mixed')">Mixed</button>
+                    </div>
+                </div>
+                <div class="quiz-card">
+                    <div class="quiz-icon">🎯</div><h3>Class 12</h3><p>CBSE/State Board</p>
+                    <div class="subject-buttons">
+                        <button class="subject-btn" onclick="startQuiz('class12','physics')">Physics</button>
+                        <button class="subject-btn" onclick="startQuiz('class12','chemistry')">Chemistry</button>
+                        <button class="subject-btn" onclick="startQuiz('class12','mathematics')">Mathematics</button>
+                        <button class="subject-btn" onclick="startQuiz('class12','biology')">Biology</button>
+                        <button class="subject-btn mixed" onclick="startQuiz('class12','mixed')">Mixed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="analytics" class="analytics-section">
+        <div class="container">
+            <h2 class="section-title">Your Performance Analytics</h2>
+            <div class="analytics-grid">
+                <div class="analytics-card"><div class="analytics-icon">📊</div><h3>Total Quizzes</h3><p class="analytics-value" id="totalQuizzes">0</p></div>
+                <div class="analytics-card"><div class="analytics-icon">⭐</div><h3>Average Score</h3><p class="analytics-value" id="averageScore">0%</p></div>
+                <div class="analytics-card"><div class="analytics-icon">🔥</div><h3>Study Streak</h3><p class="analytics-value" id="studyStreak">0 days</p></div>
+                <div class="analytics-card"><div class="analytics-icon">🏆</div><h3>Best Score</h3><p class="analytics-value" id="bestScore">0%</p></div>
+            </div>
+            <div class="recent-activity">
+                <h3>Recent Quiz History</h3>
+                <div id="recentQuizzes" class="quiz-history-list"><p class="empty-state">No quizzes taken yet. Start practicing to see your history!</p></div>
+            </div>
+            <div class="subject-performance">
+                <h3>Performance by Subject</h3>
+                <div id="subjectStats" class="subject-stats-grid"><p class="empty-state">Complete some quizzes to see your subject-wise performance!</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Study Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card"><div class="resource-icon">📋</div><h3>Cheat Sheets</h3><ul class="resource-list"><li><a href="#">Physics Formulas</a></li><li><a href="#">Chemistry Reactions</a></li><li><a href="#">Math Theorems</a></li><li><a href="#">Biology Concepts</a></li></ul></div>
+                <div class="resource-card"><div class="resource-icon">📚</div><h3>Textbooks</h3><ul class="resource-list"><li><a href="#">NCERT Physics</a></li><li><a href="#">NCERT Chemistry</a></li><li><a href="#">NCERT Mathematics</a></li><li><a href="#">NCERT Biology</a></li></ul></div>
+                <div class="resource-card"><div class="resource-icon">🎥</div><h3>Video Lectures</h3><ul class="resource-list"><li><a href="#">Khan Academy</a></li><li><a href="#">MIT OpenCourseWare</a></li><li><a href="#">NPTEL Lectures</a></li><li><a href="#">Crash Courses</a></li></ul></div>
+                <div class="resource-card"><div class="resource-icon">📝</div><h3>Previous Papers</h3><ul class="resource-list"><li><a href="#">JEE Main Papers</a></li><li><a href="#">GATE Papers</a></li><li><a href="#">KEAM Papers</a></li><li><a href="#">Board Exam Papers</a></li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QuizMaster. All rights reserved.</p>
+            <p>Happy Learning! 🚀</p>
+        </div>
+    </footer>
+
+<!-- ===================== QUIZ OVERLAY (replaces popup window) ===================== -->
+<div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1 class="quiz-title-text" id="quizTitle">Quiz</h1>
+            <div class="quiz-timer"><span class="timer-icon">⏱️</span><span id="timer">00:00</span></div>
+            <button class="quiz-close-btn" onclick="closeQuiz()">✕</button>
         </div>
 
-        <button onclick="showSubjects()">Get Started</button>
-      </div>
+        <div class="quiz-body" id="quizBody">
+            <div class="progress-info">
+                <span id="questionCounter">Question 1 of 10</span>
+                <span id="progressPercent">10%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
+            <div class="question-section">
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+            </div>
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+                <button class="nav-btn primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+            </div>
+        </div>
 
-      <!-- Subject Page -->
-      <div class="container hidden" id="subjectPage">
-        <h2>Select Subject</h2>
-        <button class="subjectButton" onclick="fetchSubject('physics')">
-          Physics
-        </button>
-        <button class="subjectButton" onclick="fetchSubject('chemistry')">
-          Chemistry
-        </button>
-        <button class="subjectButton" onclick="fetchSubject('biology')">
-          Biology
-        </button>
-        <button class="subjectButton" onclick="fetchSubject('gk')">
-          General Knowledge
-        </button>
-      </div>
+        <div class="results-container" id="resultsContainer">
+            <div class="results-icon">🎉</div>
+            <h2 class="results-title">Quiz Completed!</h2>
+            <div class="score-circle"><span class="score-text" id="scoreText">0%</span></div>
+            <div class="results-details">
+                <div class="result-item"><span class="result-label">Total Questions:</span><span class="result-value" id="totalQuestions">0</span></div>
+                <div class="result-item"><span class="result-label">Correct Answers:</span><span class="result-value" id="correctCount">0</span></div>
+                <div class="result-item"><span class="result-label">Wrong Answers:</span><span class="result-value" id="wrongCount">0</span></div>
+                <div class="result-item"><span class="result-label">Time Taken:</span><span class="result-value" id="timeTaken">-</span></div>
+                <div class="result-item"><span class="result-label">Percentage:</span><span class="result-value" id="percentage">0%</span></div>
+            </div>
+            <button class="action-btn" onclick="showAnswers()">View Answers & Explanations</button>
+            <button class="action-btn secondary" onclick="closeQuiz()">Close</button>
+        </div>
 
-      <!-- No of questions Page -->
-      <div class="container hidden" id="noOfQnsPage">
-        <h2>Select No of Questions</h2>
-        <div id="qnsNoButtons">
-          <button class="qnsNoButton" onclick="startQuiz(5)">5</button>
-          <button class="qnsNoButton" onclick="startQuiz(10)">10</button>
-          <button class="qnsNoButton" onclick="startQuiz(15)">15</button>
+        <div class="answers-container" id="answersContainer">
+            <h2 class="results-title">Answers & Explanations</h2>
+            <div id="answersGrid" class="answers-grid"></div>
+            <button class="action-btn" onclick="backToResults()">← Back to Results</button>
+            <button class="action-btn secondary" onclick="closeQuiz()">Close</button>
         </div>
-        <div></div>
-      </div>
-      <!-- Quiz Page -->
-      <div class="container hidden" id="quizPage">
-        <p id="timer">Time Left: 10s</p>
-        <h3 id="question"></h3>
-        <div id="options">
-          <button class="optionsButton"></button>
-          <button class="optionsButton"></button>
-          <button class="optionsButton"></button>
-          <button class="optionsButton"></button>
-        </div>
-        <br />
-        <div id="operations">
-          <button id="prevButton">PREV</button>
-          <button id="submitButton">SUBMIT</button>
-          <button id="clearButton">CLEAR</button>
-          <button id="nextButton">NEXT</button>
-        </div>
-      </div>
-      <!-- Result Page -->
-      <div class="container hidden" id="resultPage">
-        <h2>Result</h2>
-        <p id="studentDetails"></p>
-        <p id="score"></p>
-        <p id="grade"></p>
-        <button onclick="location.reload()">Restart</button>
-      </div>
-      <!-- Progress Page -->
-    <div class="container hidden" id="ProgressPage"></div>
     </div>
+</div>
 
-    
-
-    <script src="script.js"></script>
-  </body>
+<script src="script.js"></script>
+</body>
 </html>
